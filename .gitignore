@@ -1,0 +1,22 @@
+.DS_Store
+.idea/
+.vscode/
+
+# Gradle
+.gradle/
+build/
+
+# Java
+*.class
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.war
+hs_err_pid*
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
