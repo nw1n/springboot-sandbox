@@ -1,6 +1,5 @@
 package ch.nw1n.jackson;
 
-import tools.jackson.databind.DeserializationFeature;
 import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
@@ -27,20 +26,6 @@ public final class JsonMapperDemo {
 
         Person deserialized = mapper.readValue(serialized, Person.class);
         System.out.println("Deserialized: " + deserialized);
-    }
-
-    public static void runIgnoreUnknownDemo() {
-        // Jackson 3 ignores unknown fields unless this is enabled.
-        // @JsonIgnoreProperties on Person still skips "nickname".
-        JsonMapper mapper = JsonMapper.builder()
-                .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .build();
-
-        String json = """
-                {"full_name":"Ada","age":36,"city":"London","nickname":"A"}
-                """;
-        Person person = mapper.readValue(json, Person.class);
-        System.out.println("Ignored unknown nickname: " + person);
     }
 
     public static void runFoodDemo() {

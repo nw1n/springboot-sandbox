@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import tools.jackson.databind.DeserializationFeature;
 import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
@@ -35,25 +34,6 @@ class JsonMapperDemoTest {
         assertEquals(original.getName(), deserialized.getName());
         assertEquals(original.getAge(), deserialized.getAge());
         assertNull(deserialized.getInternalNote());
-    }
-
-    @Test
-    void ignoresUnknownProperties() {
-        JsonMapper mapper = JsonMapper.builder()
-                .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .build();
-
-        Person person = mapper.readValue(
-                "{\"full_name\":\"Ada\",\"age\":36,\"city\":\"London\",\"nickname\":\"A\"}",
-                Person.class);
-
-        assertEquals("Ada", person.getName());
-        assertEquals(36, person.getAge());
-    }
-
-    @Test
-    void runIgnoreUnknownDemo() {
-        JsonMapperDemo.runIgnoreUnknownDemo();
     }
 
     @Test
