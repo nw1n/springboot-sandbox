@@ -1,11 +1,14 @@
 package ch.nw1n.jackson;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Simple POJO used to learn Jackson 3 serialize / deserialize.
  */
 public class Person {
+    /** JSON key is "full_name" in both directions. */
+    @JsonProperty("full_name")
     private String name;
     private int age;
 
