@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
+import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
@@ -47,5 +49,26 @@ class JsonMapperDemoTest {
     @Test
     void runFoodDemo() {
         JsonMapperDemo.runFoodDemo();
+    }
+
+    @Test
+    void runFoodListDemo() {
+        JsonMapperDemo.runFoodListDemo();
+    }
+
+    @Test
+    void readsFoodList() {
+        JsonMapper mapper = JsonMapper.builder().build();
+
+        List<Food> foods = List.of(
+                new Food("Apple", 100, Food.FoodType.FRUIT),
+                new Food("Carrot", 40, Food.FoodType.VEGETABLE));
+        String serialized = mapper.writeValueAsString(foods);
+        List<Food> deserialized = mapper.readValue(serialized, new TypeReference<List<Food>>() {});
+
+        assertTrue(serialized.startsWith("["));
+        assertEquals(2, deserialized.size());
+        assertEquals("Apple", deserialized.get(0).name());
+        assertEquals(Food.FoodType.VEGETABLE, deserialized.get(1).type());
     }
 }

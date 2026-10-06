@@ -1,7 +1,9 @@
 package ch.nw1n.jackson;
 
+import java.util.List;
 import java.util.Map;
 
+import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
@@ -44,6 +46,24 @@ public final class JsonMapperDemo {
         System.out.println(serialized);
 
         Food deserialized = mapper.readValue(serialized, Food.class);
+        System.out.println("Deserialized: " + deserialized);
+    }
+
+    public static void runFoodListDemo() {
+        JsonMapper mapper = JsonMapper.builder()
+                .enable(SerializationFeature.INDENT_OUTPUT)
+                .build();
+
+        List<Food> foods = List.of(
+                new Food("Apple", 100, Food.FoodType.FRUIT),
+                new Food("Carrot", 40, Food.FoodType.VEGETABLE));
+
+        String serialized = mapper.writeValueAsString(foods);
+        System.out.println("Serialized:");
+        System.out.println(serialized);
+
+        // List.class would erase Food. TypeReference keeps the element type.
+        List<Food> deserialized = mapper.readValue(serialized, new TypeReference<List<Food>>() {});
         System.out.println("Deserialized: " + deserialized);
     }
 }
