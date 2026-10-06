@@ -1,11 +1,17 @@
 package ch.nw1n.jackson;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Simple POJO used to learn Jackson 3 serialize / deserialize.
  */
 public class Person {
     private String name;
     private int age;
+
+    /** Never written or read. */
+    @JsonIgnore
+    private String internalNote;
 
     // Jackson needs a no-arg constructor for deserialization
     public Person() {
@@ -32,8 +38,16 @@ public class Person {
         this.age = age;
     }
 
+    public String getInternalNote() {
+        return internalNote;
+    }
+
+    public void setInternalNote(String internalNote) {
+        this.internalNote = internalNote;
+    }
+
     @Override
     public String toString() {
-        return "Person{name='" + name + "', age=" + age + '}';
+        return "Person{name='" + name + "', age=" + age + ", internalNote='" + internalNote + "'}";
     }
 }

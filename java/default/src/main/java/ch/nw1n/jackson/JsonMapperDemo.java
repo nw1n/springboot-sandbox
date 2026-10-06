@@ -18,6 +18,7 @@ public final class JsonMapperDemo {
                 .build();
 
         Person person = new Person("Ada", 36);
+        person.setInternalNote("not in the JSON");
 
         String serialized = mapper.writeValueAsString(person);
         System.out.println("Serialized:");
