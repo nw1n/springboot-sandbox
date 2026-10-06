@@ -22,13 +22,14 @@ class JsonMapperDemoTest {
                 .enable(SerializationFeature.INDENT_OUTPUT)
                 .build();
 
-        Person original = new Person("Ada", 36);
+        Person original = new Person("Ada", 36, "London");
         original.setInternalNote("not in the JSON");
 
         String serialized = mapper.writeValueAsString(original);
         Person deserialized = mapper.readValue(serialized, Person.class);
 
         assertTrue(serialized.contains("\"full_name\""));
+        assertTrue(serialized.contains("\"city\" : \"London\""));
         assertFalse(serialized.contains("internalNote"));
         assertEquals(original.getName(), deserialized.getName());
         assertEquals(original.getAge(), deserialized.getAge());

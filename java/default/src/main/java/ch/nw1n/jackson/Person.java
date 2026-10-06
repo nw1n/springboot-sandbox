@@ -12,6 +12,10 @@ public class Person {
     private String name;
     private int age;
 
+    /** Included under its field name, even with no getter or setter. */
+    @JsonProperty
+    private String city;
+
     /** Never written or read. */
     @JsonIgnore
     private String internalNote;
@@ -20,9 +24,10 @@ public class Person {
     public Person() {
     }
 
-    public Person(String name, int age) {
+    public Person(String name, int age, String city) {
         this.name = name;
         this.age = age;
+        this.city = city;
     }
 
     public String getName() {
@@ -51,6 +56,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{name='" + name + "', age=" + age + ", internalNote='" + internalNote + "'}";
+        return "Person{name='" + name + "', age=" + age + ", city='" + city
+                + "', internalNote='" + internalNote + "'}";
     }
 }
