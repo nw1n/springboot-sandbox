@@ -20,6 +20,9 @@ public class Person {
     @JsonIgnore
     private String internalNote;
 
+    /** Nested object. Jackson writes this as a JSON object. */
+    private Food favoriteFood;
+
     // Jackson needs a no-arg constructor for deserialization
     public Person() {
     }
@@ -54,9 +57,17 @@ public class Person {
         this.internalNote = internalNote;
     }
 
+    public Food getFavoriteFood() {
+        return favoriteFood;
+    }
+
+    public void setFavoriteFood(Food favoriteFood) {
+        this.favoriteFood = favoriteFood;
+    }
+
     @Override
     public String toString() {
         return "Person{name='" + name + "', age=" + age + ", city='" + city
-                + "', internalNote='" + internalNote + "'}";
+                + "', favoriteFood=" + favoriteFood + ", internalNote='" + internalNote + "'}";
     }
 }

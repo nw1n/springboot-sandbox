@@ -19,6 +19,7 @@ public final class JsonMapperDemo {
 
         Person person = new Person("Ada", 36, "London");
         person.setInternalNote("not in the JSON");
+        person.setFavoriteFood(new Food("Apple", 100, Food.FoodType.FRUIT));
 
         String serialized = mapper.writeValueAsString(person);
         System.out.println("Serialized:");

@@ -24,6 +24,7 @@ class JsonMapperDemoTest {
 
         Person original = new Person("Ada", 36, "London");
         original.setInternalNote("not in the JSON");
+        original.setFavoriteFood(new Food("Apple", 100, Food.FoodType.FRUIT));
 
         String serialized = mapper.writeValueAsString(original);
         Person deserialized = mapper.readValue(serialized, Person.class);
@@ -33,6 +34,8 @@ class JsonMapperDemoTest {
         assertFalse(serialized.contains("internalNote"));
         assertEquals(original.getName(), deserialized.getName());
         assertEquals(original.getAge(), deserialized.getAge());
+        assertEquals("Apple", deserialized.getFavoriteFood().name());
+        assertEquals(Food.FoodType.FRUIT, deserialized.getFavoriteFood().type());
         assertNull(deserialized.getInternalNote());
     }
 
