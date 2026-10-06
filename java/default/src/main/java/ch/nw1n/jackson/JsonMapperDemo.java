@@ -1,5 +1,6 @@
 package ch.nw1n.jackson;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ public final class JsonMapperDemo {
 
         Person person = new Person("Ada", 36, "London");
         person.setBirthday(LocalDate.of(2026, 10, 6));
+        person.setAppointment(Instant.parse("2026-10-06T14:30:00Z"));
         person.setInternalNote("not in the JSON");
         person.setFavoriteFood(new Food("Apple", 100, Food.FoodType.FRUIT));
         person.setAttributes(Map.of("nickname", "A", "language", "en"));

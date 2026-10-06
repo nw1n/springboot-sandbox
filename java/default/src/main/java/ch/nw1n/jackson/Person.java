@@ -1,5 +1,6 @@
 package ch.nw1n.jackson;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -19,6 +20,9 @@ public class Person {
     /** Written as "yyyy-MM-dd", not as [year, month, day]. */
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
+
+    /** Default ISO-8601 instant, no custom pattern. */
+    private Instant appointment;
 
     /** Included under its field name, even with no getter or setter. */
     @JsonProperty
@@ -68,6 +72,14 @@ public class Person {
         this.birthday = birthday;
     }
 
+    public Instant getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Instant appointment) {
+        this.appointment = appointment;
+    }
+
     public String getInternalNote() {
         return internalNote;
     }
@@ -94,7 +106,8 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{name='" + name + "', age=" + age + ", birthday=" + birthday + ", city='" + city
+        return "Person{name='" + name + "', age=" + age + ", birthday=" + birthday
+                + ", appointment=" + appointment + ", city='" + city
                 + "', favoriteFood=" + favoriteFood + ", attributes=" + attributes
                 + ", internalNote='" + internalNote + "'}";
     }

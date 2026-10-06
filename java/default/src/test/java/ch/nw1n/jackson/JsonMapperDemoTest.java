@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ class JsonMapperDemoTest {
 
         Person original = new Person("Ada", 36, "London");
         original.setBirthday(LocalDate.of(2026, 10, 6));
+        original.setAppointment(Instant.parse("2026-10-06T14:30:00Z"));
         original.setInternalNote("not in the JSON");
         original.setFavoriteFood(new Food("Apple", 100, Food.FoodType.FRUIT));
         original.setAttributes(Map.of("nickname", "A", "language", "en"));
@@ -43,6 +45,8 @@ class JsonMapperDemoTest {
         assertEquals(original.getAge(), deserialized.getAge());
         assertTrue(serialized.contains("\"birthday\" : \"2026-10-06\""));
         assertEquals(LocalDate.of(2026, 10, 6), deserialized.getBirthday());
+        assertTrue(serialized.contains("\"appointment\" : \"2026-10-06T14:30:00Z\""));
+        assertEquals(Instant.parse("2026-10-06T14:30:00Z"), deserialized.getAppointment());
         assertEquals("Apple", deserialized.getFavoriteFood().name());
         assertEquals(Food.FoodType.FRUIT, deserialized.getFavoriteFood().type());
         assertEquals("A", deserialized.getAttributes().get("nickname"));
