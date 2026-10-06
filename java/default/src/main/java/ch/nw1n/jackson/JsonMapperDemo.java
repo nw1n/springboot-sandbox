@@ -1,5 +1,7 @@
 package ch.nw1n.jackson;
 
+import java.util.Map;
+
 import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
@@ -20,6 +22,7 @@ public final class JsonMapperDemo {
         Person person = new Person("Ada", 36, "London");
         person.setInternalNote("not in the JSON");
         person.setFavoriteFood(new Food("Apple", 100, Food.FoodType.FRUIT));
+        person.setAttributes(Map.of("nickname", "A", "language", "en"));
 
         String serialized = mapper.writeValueAsString(person);
         System.out.println("Serialized:");

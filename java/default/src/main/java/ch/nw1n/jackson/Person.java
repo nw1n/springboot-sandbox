@@ -1,5 +1,7 @@
 package ch.nw1n.jackson;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -22,6 +24,9 @@ public class Person {
 
     /** Nested object. Jackson writes this as a JSON object. */
     private Food favoriteFood;
+
+    /** Keys are not fixed fields. Jackson writes each entry as a JSON property. */
+    private Map<String, String> attributes;
 
     // Jackson needs a no-arg constructor for deserialization
     public Person() {
@@ -65,9 +70,18 @@ public class Person {
         this.favoriteFood = favoriteFood;
     }
 
+    public Map<String, String> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Map<String, String> attributes) {
+        this.attributes = attributes;
+    }
+
     @Override
     public String toString() {
         return "Person{name='" + name + "', age=" + age + ", city='" + city
-                + "', favoriteFood=" + favoriteFood + ", internalNote='" + internalNote + "'}";
+                + "', favoriteFood=" + favoriteFood + ", attributes=" + attributes
+                + ", internalNote='" + internalNote + "'}";
     }
 }
