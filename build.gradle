@@ -5,6 +5,13 @@ plugins {
 }
 
 subprojects {
+    // :java and :springboot are folders that group real modules. They have no
+    // sources and no dependency management, so a version-less JUnit launcher
+    // cannot be resolved there.
+    if (!childProjects.isEmpty()) {
+        return
+    }
+
     apply plugin: 'java'
 
     group = 'ch.nw1n'

@@ -11,5 +11,5 @@ pluginManagement {
 
 rootProject.name = 'springboot-sandbox'
 
-include 'java:oop-basics'
+include 'java:default'
 include 'springboot:hello'

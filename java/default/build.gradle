@@ -7,5 +7,7 @@ application {
 }
 
 dependencies {
+    implementation 'tools.jackson.core:jackson-databind:3.2.3'
+    implementation 'org.jspecify:jspecify:1.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
 }
