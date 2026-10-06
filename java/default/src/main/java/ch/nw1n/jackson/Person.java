@@ -1,7 +1,9 @@
 package ch.nw1n.jackson;
 
+import java.time.LocalDate;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,6 +15,10 @@ public class Person {
     @JsonProperty("full_name")
     private String name;
     private int age;
+
+    /** Written as "yyyy-MM-dd", not as [year, month, day]. */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birthday;
 
     /** Included under its field name, even with no getter or setter. */
     @JsonProperty
@@ -54,6 +60,14 @@ public class Person {
         this.age = age;
     }
 
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
     public String getInternalNote() {
         return internalNote;
     }
@@ -80,7 +94,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{name='" + name + "', age=" + age + ", city='" + city
+        return "Person{name='" + name + "', age=" + age + ", birthday=" + birthday + ", city='" + city
                 + "', favoriteFood=" + favoriteFood + ", attributes=" + attributes
                 + ", internalNote='" + internalNote + "'}";
     }
